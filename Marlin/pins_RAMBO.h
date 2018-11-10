@@ -49,7 +49,31 @@
 //
 // Servos
 //
-#define SERVO0_PIN         22   // Motor header MX1
+
+//A lot of the visual tutorials for hooking up the BLTouch to a RAMBO
+//showed the servo pin being hooked up the the leftmost pin of the MX1
+//expansion header.  I was having trouble getting this to work, so I
+//tracked down the schematic at https://reprap.org/mediawiki/images/d/d0/RAMBo-Schem-1.2e-i2c-note.png
+//and found out that this was PIN 44.
+//
+//So on the MX1 expansion header my wiring looks like:
+//
+// s o o - +    where 's' is the servo pin, '-' is the ground pin, and '+' is the power pin.
+#define SERVO0_PIN         44   // Motor header MX1
+//
+// So everything was working, and I was happy.  Only later did I realize that
+// all of the visual guides were doing it wrong, and if I'd left the servo pin
+// as 22 I could have wired things up as follows:
+//
+// o o s - +
+//#define SERVO0_PIN         22   // Motor header MX1
+//
+// GAH!  So I could have kept everything in one nice 3-pin connector, but
+// instead I've got 2 wires ina 2-pin connector and one wire all by itself
+// in a single pin connector.  So you can comment out the line that defines
+// SERVO0_PIN as 44 and uncomment the line defining it as 22 if you want nice
+// neat wiring.
+
 #define SERVO1_PIN         23   // Motor header MX2
 #define SERVO2_PIN         24   // Motor header MX3
 #define SERVO3_PIN          5   // PWM header pin 5
